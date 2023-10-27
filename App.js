@@ -8,16 +8,22 @@ export default function App() {
   const Stack = createNativeStackNavigator();
 
   return (
+    
     <NavigationContainer>
         <TailwindProvider>
           <Stack.Navigator>
+            {/* Bottom Navigation Bar Starts*/}
             <Stack.Screen
               name="BottomNavBar"
               component={BottomNavigationBar}
               options={{ headerShown: false }}
             />
+             {/* Bottom Navigation Bar Ends*/}
           </Stack.Navigator>
         </TailwindProvider>
     </NavigationContainer>
+    
   );
 }
+
+
