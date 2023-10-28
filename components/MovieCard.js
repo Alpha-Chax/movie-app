@@ -12,15 +12,21 @@ const MovieCard = (props) => {
           source={{
             uri: props.image,
           }}
+          style={{
+            height: 140, 
+            width: 240, 
+            aspectRatio: 1.6, 
+          }}
           resizeMode='stretch'  
-          className="h-36 w-56 self-center"
+          className="self-center"
         />
-      </View> 
-      <Text numberOfLines={2} className="text-white pr-2 text-center text-base">{props.title}</Text>
-      <View className="flex-row justify-start pl-3 items-center">
+      
+      <Text numberOfLines={2} className="text-white pl-2 ml-1 text-base">{props.title}</Text>
+      <View className="flex-row justify-start pl-4 ml-1 items-center">
         <Text className="text-slate-300 pt-1 text-center text-xs">{props.year}</Text>
         <Text className="text-slate-300 pt-1 text-center mx-2 text-xs">|</Text>
       <Text className="text-slate-300 pt-1 text-center text-xs">{props.duration}</Text>
+      </View> 
       </View>
     </TouchableOpacity>
   )

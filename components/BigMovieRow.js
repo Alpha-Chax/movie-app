@@ -1,8 +1,8 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 import React from "react";
 import MovieCard from "./MovieCard";
 
-const BigMovieRow = () => {
+const BigMovieRow = ({movies}) => {
   return (
     <View>
       <ScrollView
@@ -12,30 +12,15 @@ const BigMovieRow = () => {
         }}
         className="pt-4"
       >
+         {movies && movies.map((movie) => (
         <MovieCard
-          image="https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg"
-          title="Mowgli: Legend of the Jungle"
-          duration="104 min"
-          year="2018"
+        key={`${movie.Title}-${movie.Year}`}
+        image={movie.Poster ?? "https://m.media-amazon.com/images/M/MV5BNzc3Mzg1OGYtZjc3My00Y2NhLTgyOWUtYjRhMmI4OTkwNDg4XkEyXkFqcGdeQXVyMTU3NDU4MDg2._V1_.jpg"}
+        title={movie.Title}
+        year={movie.Year}
+        duration={movie.Runtime}
         />
-         <MovieCard
-          image="https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg"
-          title="Mowgli: Legend of the Jungle"
-          duration="104 min"
-          year="2018"
-        />
-         <MovieCard
-          image="https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg"
-          title="Mowgli: Legend of the Jungle"
-          duration="104 min"
-          year="2018"
-        />
-         <MovieCard
-          image="https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg"
-          title="Mowgli: Legend of the Jungle"
-          duration="104 min"
-          year="2018"
-        />
+         ))}
       </ScrollView>
     </View>
   );

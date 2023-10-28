@@ -1,13 +1,29 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import { View, Text, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppLayout from "./AppLayout";
-import { ChevronRightIcon } from "react-native-heroicons/outline";
 import SmallMovieRow from "../components/SmallMovieRow";
 import RowHeading from "../components/RowHeading";
 import BigMovieRow from "../components/BigMovieRow";
 
 const Movies = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies");
+        const data = await response.json();
+        setMovies(data); 
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     //App Layout
     <AppLayout>
@@ -23,7 +39,7 @@ const Movies = () => {
           {/* Popular Starts*/}
           <RowHeading title="Popular" />
           {/* Popular Movies Row*/}
-          <SmallMovieRow />
+          <SmallMovieRow movies={movies}/>
           {/* Popular Ends */}
 
           {/* Playing In Theatres Starts*/}
@@ -31,14 +47,14 @@ const Movies = () => {
             <RowHeading title="Playing In Theatres" />
           </View>
           {/* Playing In THeatres Row */}
-          <BigMovieRow />
+          <BigMovieRow movies={movies}/>
           {/* Playing In Theatres Ends*/}
 
           {/* Trending Starts */}
           <View className="mt-3">
           <RowHeading title="Trending"/>
           </View>
-          <SmallMovieRow />
+          <SmallMovieRow movies={movies}/>
           {/* Trending Ends */}
           {/* Body Ends */}
         </ScrollView>

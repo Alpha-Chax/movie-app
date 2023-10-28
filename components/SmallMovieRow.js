@@ -1,10 +1,11 @@
-import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import { View, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import MovieTile from "./MovieTile";
 
-const SmallMovieRow = () => {
+const SmallMovieRow = ({movies}) => {
+
   return (
-    <View >
+    <View className="pr-3">
       <ScrollView
         horizontal
         contentContainerStyle={{
@@ -14,26 +15,14 @@ const SmallMovieRow = () => {
           alignSelf: "center"
         }}  
       >
-        <MovieTile image="https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg" 
-        title="Lion King"
-        year="2019"
-        />
-         <MovieTile image="https://m.media-amazon.com/images/M/MV5BMjMzODc2NzU5MV5BMl5BanBnXkFtZTgwNTMwMTE3NjM@._V1_SX300.jpg" 
-        title="Mowgli: Legend of the Jungle"
-        year="2018"
-        />
-         <MovieTile image="https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg" 
-        title="Lion King"
-        year="2019"
-        />
-         <MovieTile image="https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg" 
-        title="Lion King"
-        year="2019"
-        />
-         <MovieTile image="https://m.media-amazon.com/images/M/MV5BMjIwMjE1Nzc4NV5BMl5BanBnXkFtZTgwNDg4OTA1NzM@._V1_SX300.jpg" 
-        title="Lion King"
-        year="2019"
-        />
+       {movies && movies.map((movie) => (
+          <MovieTile
+            key={`${movie.Title}-${movie.Year}`}
+            image={movie.Poster ?? "https://m.media-amazon.com/images/M/MV5BNzc3Mzg1OGYtZjc3My00Y2NhLTgyOWUtYjRhMmI4OTkwNDg4XkEyXkFqcGdeQXVyMTU3NDU4MDg2._V1_.jpg"}
+            title={movie.Title}
+            year={movie.Year}
+          />
+        ))}
       </ScrollView>
     </View>
   );
