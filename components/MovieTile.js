@@ -1,9 +1,17 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import Loader from "./Loader";
 
 const MovieTile = (props) => {
   const navigation = useNavigation();
+
+  if (props.loading) {
+    return (
+      <Loader />
+    );
+  }
+
   return (
     <TouchableOpacity
       onPress={() => {}}

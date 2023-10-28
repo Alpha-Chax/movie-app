@@ -21,8 +21,8 @@ const MovieCard = (props) => {
           className="self-center"
         />
       
-      <Text numberOfLines={2} className="text-white pl-2 ml-1 text-base">{props.title}</Text>
-      <View className="flex-row justify-start pl-4 ml-1 items-center">
+      <Text numberOfLines={2} className="text-white ml-1 text-base">{props.title}</Text>
+      <View className="flex-row justify-start  ml-1 items-center">
         <Text className="text-slate-300 pt-1 text-center text-xs">{props.year}</Text>
         <Text className="text-slate-300 pt-1 text-center mx-2 text-xs">|</Text>
       <Text className="text-slate-300 pt-1 text-center text-xs">{props.duration}</Text>

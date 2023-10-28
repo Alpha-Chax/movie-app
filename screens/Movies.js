@@ -8,13 +8,14 @@ import BigMovieRow from "../components/BigMovieRow";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies");
         const data = await response.json();
         setMovies(data); 
+        setLoading(false)
         console.log(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -39,7 +40,7 @@ const Movies = () => {
           {/* Popular Starts*/}
           <RowHeading title="Popular" />
           {/* Popular Movies Row*/}
-          <SmallMovieRow movies={movies}/>
+          <SmallMovieRow movies={movies} loading={loading}/>
           {/* Popular Ends */}
 
           {/* Playing In Theatres Starts*/}
@@ -47,14 +48,14 @@ const Movies = () => {
             <RowHeading title="Playing In Theatres" />
           </View>
           {/* Playing In THeatres Row */}
-          <BigMovieRow movies={movies}/>
+          <BigMovieRow movies={movies} loading={loading}/>
           {/* Playing In Theatres Ends*/}
 
           {/* Trending Starts */}
           <View className="mt-3">
           <RowHeading title="Trending"/>
           </View>
-          <SmallMovieRow movies={movies}/>
+          <SmallMovieRow movies={movies} loading={loading}/>
           {/* Trending Ends */}
           {/* Body Ends */}
         </ScrollView>
