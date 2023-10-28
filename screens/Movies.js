@@ -1,31 +1,38 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AppLayout from "./AppLayout";
 import { ChevronRightIcon } from "react-native-heroicons/outline";
+import MovieRow from "../components/MovieRow";
+import RowHeading from "../components/RowHeading";
 
 const Movies = () => {
   return (
     //App Layout
     <AppLayout>
-      
       <SafeAreaView>
-        {/* Header  Starts*/}
-        <View className="h-16 bg-slate-800 px-4 pt-4">
-          <Text className="text-white text-xl">Movies</Text>
-        </View>
-        {/* Header Ends*/}
-        {/* Body Starts */}
-        <View className="flex-row justify-between items-center mx-4 mt-3">
-          <Text className="text-white text-lg">Popular</Text>
-          <TouchableOpacity onPress={()=>{}}>
-          <View className="flex-row items-center">
-          <Text className="text-gray-300 text-xs">See all</Text>
-          <ChevronRightIcon className="pt-2" color="#D3D3D3" size={16}/>
+        <ScrollView>
+          {/* Header  Starts*/}
+          <View className="h-16 bg-slate-800 px-4 pt-4">
+            <Text className="text-white text-xl">Movies</Text>
           </View>
-          </TouchableOpacity>
-        </View>
-        {/* Body Ends */}
+          {/* Header Ends*/}
+          {/* Body Starts */}
+
+          {/* Popular Starts*/}
+          <RowHeading title="Popular" />
+          {/* Popular Movies Row*/}
+          <MovieRow />
+          {/* Popular Ends */}
+
+          {/* Playing In Theatres Starts*/}
+          <View className="mt-3">
+            <RowHeading title="Playing In Theatres" />
+          </View>
+
+          {/* Playing In Theatres Ends*/}
+          {/* Body Ends */}
+        </ScrollView>
       </SafeAreaView>
     </AppLayout>
   );
