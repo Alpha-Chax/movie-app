@@ -5,29 +5,32 @@ import AppLayout from "./AppLayout";
 import SmallMovieRow from "../components/SmallMovieRow";
 import RowHeading from "../components/RowHeading";
 import BigMovieRow from "../components/BigMovieRow";
+import { MoviesContext } from "../contexts/MoviesContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies");
-        const data = await response.json();
-        setMovies(data); 
-        setLoading(false)
-        console.log(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  const fetchMovies = async () => {
+    try {
+      const response = await fetch("https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies");
+      const data = await response.json();
+      await AsyncStorage.setItem('moviesData', JSON.stringify(data));
+      setMovies(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    fetchMovies();
   }, []);
 
   return (
     //App Layout
     <AppLayout>
+      <MoviesContext.Provider value={{ movies, loading, fetchMovies }}>
       <SafeAreaView>
         <ScrollView className="mb-20">
           {/* Header  Starts*/}
@@ -40,7 +43,7 @@ const Movies = () => {
           {/* Popular Starts*/}
           <RowHeading title="Popular" />
           {/* Popular Movies Row*/}
-          <SmallMovieRow movies={movies} loading={loading}/>
+          <SmallMovieRow />
           {/* Popular Ends */}
 
           {/* Playing In Theatres Starts*/}
@@ -48,18 +51,19 @@ const Movies = () => {
             <RowHeading title="Playing In Theatres" />
           </View>
           {/* Playing In THeatres Row */}
-          <BigMovieRow movies={movies} loading={loading}/>
+          <BigMovieRow/>
           {/* Playing In Theatres Ends*/}
 
           {/* Trending Starts */}
           <View className="mt-3">
           <RowHeading title="Trending"/>
           </View>
-          <SmallMovieRow movies={movies} loading={loading}/>
+          <SmallMovieRow />
           {/* Trending Ends */}
           {/* Body Ends */}
         </ScrollView>
       </SafeAreaView>
+      </MoviesContext.Provider>
     </AppLayout>
   );
 };
